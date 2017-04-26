@@ -144,7 +144,19 @@ Switchery.prototype.setPosition = function (clicked) {
     this.element.checked = false;
     this.switcher.style.backgroundColor = '';
     this.switcher.style.borderColor =  '';
+  } 
+
+  var jquery = (window.jQuery || window.$);
+  if((typeof jquery != 'undefined') && jquery.fn){
+    jquery(this.element).trigger('change');
+  }else{
+    var event = new Event('change',{
+      target: this.element,
+      bubbles: true
+    });
+    this.element.dispatchEvent(event);
   }
+
 };
 
 /**
